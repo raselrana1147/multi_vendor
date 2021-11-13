@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
-
+use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\Seller\Auth\SellerLoginController;
@@ -24,7 +24,11 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 
 
+	Route::get('category_list',[CategoryController::class,'index'])->name('admin.category_list');
+	Route::get('category_create',[CategoryController::class,'create'])->name('admin.category_create');
 
+
+	// Authenticate Routes
 	Route::get('login',[LoginController::class,'showLoginForm'])->name('admin.login');
 	Route::post('login',[LoginController::class,'login'])->name('admin.login');
 	Route::post("admin_logout",[LoginController::class,'logout'])->name('admin.logout');
