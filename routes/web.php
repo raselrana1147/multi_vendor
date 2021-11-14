@@ -24,8 +24,13 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 
 
+	Route::get('load_category',[CategoryController::class,'datatable'])->name('admin.load_category');
 	Route::get('category_list',[CategoryController::class,'index'])->name('admin.category_list');
 	Route::get('category_create',[CategoryController::class,'create'])->name('admin.category_create');
+	Route::post('category_store',[CategoryController::class,'store'])->name('admin.category_store');
+	Route::get('category_edit',[CategoryController::class,'edit'])->name('admin.category_edit');
+	Route::post('category_update',[CategoryController::class,'update'])->name('admin.category_update');
+	Route::post('category_delete',[CategoryController::class,'delete'])->name('admin.category_delete');
 
 
 	// Authenticate Routes

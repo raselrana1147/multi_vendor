@@ -1,4 +1,5 @@
- <meta charset="utf-8" />
+        <meta charset="utf-8" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <title>@yield('title')</title>
@@ -20,4 +21,7 @@
         <link href="{{ asset('assets/backend/assets/css/metismenu.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/backend/assets/css/icons.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/backend/assets/css/style.css')}}" rel="stylesheet" type="text/css">
+        
+        <link href="{{ asset('assets/backend/style/css/dropify.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/style/css/toastr.css')}}" rel="stylesheet" type="text/css">
         @yield('css')

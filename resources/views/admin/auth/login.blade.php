@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -35,7 +36,8 @@
                                 <div class="p-3"> 
                                     <h4 class="font-18 text-center">DPG-E-Marketplace</h4>
                                     <p class="text-muted text-center mb-4">Sign in to continue to DPG-E-Marketplace.</p>
-                                    <form class="form-horizontal" action="{{ route('admin.login') }}" method="POST">
+                                    <div id="message_area" style="display: none"></div>
+                                    <form  class="form-horizontal" data-action="{{ route('admin.login') }}" method="POST" id="kt_sign_in_form">
                 						@csrf
                                         <div class="form-group">
                                             <label for="username">E-mail</label>
@@ -53,7 +55,7 @@
                                         </div>
                                         
                                         <div class="mt-3">
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
+                                            <button class="btn btn-primary btn-block waves-effect waves-light submit_button" type="submit">Log In</button>
                                         </div>
             
                                         <div class="mt-4 text-center">
@@ -76,17 +78,61 @@
         </div>
 
         <!-- jQuery  -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/metismenu.min.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/waves.min.js"></script>
+        <script src="{{ asset('assets/backend/assets/js/jquery.min.js')}}"></script>
+        <script src="{{ asset('assets/backend/assets/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('assets/backend/assets/js/metismenu.min.js')}}"></script>
+        <script src="{{ asset('assets/backend/assets/js/jquery.slimscroll.js')}}"></script>
+        <script src="{{ asset('assets/backend/assets/js/waves.min.js')}}"></script>
 
         <!-- App js -->
-        <script src="assets/js/app.js"></script>
+        <script src="{{ asset('assets/backend/assets/js/app.js')}}"></script>
+        <script>
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           });
+      </script>
+
+
+        <script>
+            $(document).ready(function(){
+
+                $('body').on('submit','#kt_sign_in_form',function(e){
+              
+                e.preventDefault();
+                let formDta = new FormData(this);
+
+                $('.submit_button').text("Processing").prop('disabled',true);
+                 $('#message_area').html('<div class="alert alert-success">Processing...</div>').show();
+
+                $.ajax({
+                  url: $(this).attr('data-action'),
+                  method: "POST",
+                  data: formDta,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success:function(response){
+
+                    let data=JSON.parse(response);
+
+                    if(data.status==200){
+                        $('#message_area').html('<div class="alert alert-success">Successfull !!!</div>').show();
+                        window.location = data.route
+                    }else{
+                        //toastr.error(data.message);   
+                        $('#message_area')
+                        .html('<div class="alert alert-danger">Credential Not Match</div>').show();
+                         $('.submit_button').text("Sing In").prop('disabled',false);
+                    }
+                  },
+
+                 
+                });
+          })
+            })
+        </script>
         
     </body>
-
-
-<!-- Mirrored from themesbrand.com/veltrix/layouts-2/vertical/pages-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 13 Jan 2020 07:07:27 GMT -->
 </html>

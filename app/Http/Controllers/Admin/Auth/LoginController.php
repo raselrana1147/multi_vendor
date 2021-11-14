@@ -40,9 +40,9 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+             if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 $notification=['alert'=>'success','message'=>'Successfully Added','status'=>200,'route'=>route("admin.dashboard")];
-                return redirect()->intended(route('admin.dashboard'))->with($notification);
+                return json_encode($notification);
             }else{
                 $notification=['alert'=>'error','message'=>'Credentials not match','status'=>400,'route'=>'admin.login'];
                  return json_encode($notification);
