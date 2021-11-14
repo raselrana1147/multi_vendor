@@ -56,9 +56,10 @@ class CategoryController extends Controller
     	return view('admin.category.index');
     }
 
-    public function edit()
+    public function edit($id)
     {
-       return "ok";
+      $data=Category::findOrFail($id);
+       return view('admin.category.edit',compact('data'));
     }
 
    public function create()

@@ -51,7 +51,7 @@
     </script>
     <script>
         $(document).ready(function(){
-
+              
               $('body').on('click','.delete_item',function(){
                 let item_id=$(this).attr('item_id');
                 swal({

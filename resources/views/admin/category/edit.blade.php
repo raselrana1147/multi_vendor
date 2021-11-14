@@ -1,10 +1,8 @@
 @extends("layouts.admin")
-@section("title","DPG Admin | Category Create")
-@section("breadcrumb","Category Create")
+@section("title","DPG Admin | Category Update")
+@section("breadcrumb","Category Update")
 @section("content")
-      <div class="message_section" style="display: none">
-        
-      </div>
+      <div class="message_section" style="display: none"></div>
    <div class="row">
 
        <div class="col-lg-8 offset-2">
@@ -17,13 +15,13 @@
 
                        <div class="form-group">
                            <label>Category Name</label>
-                           <input type="text" class="form-control" name="category_name" required placeholder="Enter Name"/>
+                           <input type="text" class="form-control" name="category_name" required value="{{$data->category_name}}" />
                        </div>
    
                        <div class="form-group">
                            <label>Image</label>
                            <div>
-                               <input type="file" name="image" class="form-control dropify" multiple="true" />
+                               <input type="file" name="image" class="form-control dropify" data-default-file="{{($data->image !=null) ?  asset('assets/backend/image/category/small/'.$data->image) : asset('assets/backend/image/default.png') }}"/>
                            </div>
                            
                        </div>
@@ -76,12 +74,13 @@
                             </button>
                            </div>`).show();
                            $(".submit_button").text("Submit").prop('disabled', false)
-                          }     
+                          }
+
+            
                     }
 
                   });
             });
-
     })
 </script>
 

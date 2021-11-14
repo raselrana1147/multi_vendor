@@ -33,7 +33,7 @@
           <script src="{{ asset('assets/backend/style/js/toastr.js')}}"></script>
           <script src="{{ asset('assets/backend/style/js/sweet-alert.js')}}"></script>
           
-       {{--  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+        {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
         <script>
            $.ajaxSetup({
                headers: {
