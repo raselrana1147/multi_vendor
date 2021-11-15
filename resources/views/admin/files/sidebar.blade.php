@@ -8,7 +8,7 @@
                             <li class="menu-title">Overview</li>
                             <li>
                                 <a href="{{ route('admin.dashboard') }}" class="waves-effect">
-                                    <i class="ion ion-md-speedometer"></i><span class="badge badge-success badge-pill float-right">2</span> <span> Dashboard </span>
+                                    <i class="ion ion-md-speedometer"></i><span> Dashboard </span>
                                 </a>
                             </li>
 
@@ -23,21 +23,17 @@
                             </li>
 
                             <li>
-                                <a href="calendar.html" class="waves-effect"><i class="ion ion-md-calendar"></i><span> Calendar </span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-list"></i><span>Sub Category<span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                                <ul class="submenu">
+                                    <li><a href="{{ route('admin.subcategory_create') }}">Create Sub Category</a></li>
+                                    <li><a href="{{ route('admin.subcategory_list') }}">Sub Category List</a></li>
+                                </ul>
                             </li>
 
-                           
 
                             <li>
-                                <a href="projects.html" class="waves-effect waves-light"><i class="ion ion-md-clipboard"></i><span> Projects </span></a>
+                                <a href="calendar.html" class="waves-effect"><i class="ion ion-md-calendar"></i><span>Products List </span></a>
                             </li>
-
-                            <li class="menu-title">Pages</li>
-
-                        
-
-                            <li class="menu-title">Components</li>
-
                            
                         </ul>
 

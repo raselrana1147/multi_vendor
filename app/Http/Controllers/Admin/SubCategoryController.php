@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Validator;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -11,13 +12,15 @@ use Illuminate\Support\Str;
 use Image;
 use Illuminate\Database\QueryException;
 use App\Models\Admin\Category;
+use App\Models\Admin\SubCategory;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\File;
 
-class CategoryController extends Controller
+
+class SubCategoryController extends Controller
 {
-    
-     public function __construct()
+   
+    public function __construct()
     {
         $this->middleware('auth:admin');
     }
@@ -53,7 +56,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-    	return view('admin.category.index');
+    	return view('admin.subCategory.index');
     }
 
     public function edit($id)
@@ -64,7 +67,8 @@ class CategoryController extends Controller
 
    public function create()
    {
-   	 return view('admin.category.create');
+   	$categories=Category::latest()->get();
+   	 return view('admin.subCategory.create',compact('categories'));
    }
 
    public function store(Request $request)

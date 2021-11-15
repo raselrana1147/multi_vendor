@@ -1,29 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//==================Admin=============
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 
+
+//=========seller===============
 use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\Seller\Auth\SellerLoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 
+// Admin routes
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 
-
+	// Category Routes
 	Route::get('load_category',[CategoryController::class,'datatable'])->name('admin.load_category');
 	Route::get('category_list',[CategoryController::class,'index'])->name('admin.category_list');
 	Route::get('category_create',[CategoryController::class,'create'])->name('admin.category_create');
@@ -33,12 +28,24 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::post('category_delete',[CategoryController::class,'delete'])->name('admin.category_delete');
 
 
+	// Sub Category Routes
+	Route::get('load_subcategory',[SubCategoryController::class,'datatable'])->name('admin.load_subcategory');
+	Route::get('subcategory_list',[SubCategoryController::class,'index'])->name('admin.subcategory_list');
+	Route::get('subcategory_create',[SubCategoryController::class,'create'])->name('admin.subcategory_create');
+	Route::post('subcategory_store',[SubCategoryController::class,'store'])->name('admin.subcategory_store');
+	Route::get('subcategory_edit/{id}',[SubCategoryController::class,'edit'])->name('admin.subcategory_edit');
+	Route::post('subcategory_update',[SubCategoryController::class,'update'])->name('admin.subcategory_update');
+	Route::post('subcategory_delete',[SubCategoryController::class,'delete'])->name('admin.subcategory_delete');
+
+
 	// Authenticate Routes
 	Route::get('login',[LoginController::class,'showLoginForm'])->name('admin.login');
 	Route::post('login',[LoginController::class,'login'])->name('admin.login');
 	Route::post("admin_logout",[LoginController::class,'logout'])->name('admin.logout');
 });
 
+
+// Seller Routes
 Route::group(['prefix'=>'seller'],function(){
 	Route::get('dashboard',[SellerController::class,'index'])->name('seller.dashboard');
 
@@ -52,7 +59,12 @@ Route::group(['prefix'=>'seller'],function(){
 
 
 
-
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|---------------------------------------------------------
+|
+*/
 
 
 Route::get('/', function () {
